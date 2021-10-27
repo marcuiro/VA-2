@@ -5,6 +5,7 @@
 
 struct Node {
 	int PID;
+	int tamanho;
 	char name [32];
 	struct Node *next;
 };
@@ -19,11 +20,6 @@ int main() {
 	setlocale(LC_ALL, "Portuguese");
 
 	int select;
-	
-	do{
-		select=menu();
-		//opcao(FILA, select);
-	} while(select);
 	
 	return 0;
 
