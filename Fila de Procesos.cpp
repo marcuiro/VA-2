@@ -3,17 +3,21 @@
 #include <locale.h>
 
 
-struct Node {
+typedef struct Node {
 	int PID;
 	int tamanho;
-	char name [32];
+	char nome [32];
 	struct Node *next;
-};
+} Node;
 
-typedef struct Node node;
+typedef struct Fila {
+	Node *ini;
+	Node *end;
+}Fila;
 
 //protótipos de funções
-int menu(void);
+void enfileirar(int PID, int tamanho, char nome[32], Fila *f1, Fila *f2);
+//int menu(void);
 
 int main() {
 
@@ -25,7 +29,23 @@ int main() {
 
 }
 
-int menu(void) {
+void enfileirar(int PID, int tamanho, char nome[32], Fila *f1, Fila *f2) {
+	Node *ptr = (Node*) malloc(sizeof(Node));
+	if(ptr == NULL){
+		printf("FALHA NA ALOCAÇÂO!!! /n");
+		} else {
+			ptr->PID = PID;
+			ptr->tamanho = tamanho;
+			ptr->nome[32] = nome[32];
+			ptr->next = NULL;
+			if(f1->ini == NULL) {
+				f1->ini = ptr;
+			}
+			
+			f1->end = ptr;
+	}
+}
+/*int menu(void) {
 	
 	int select;
 	
@@ -40,4 +60,4 @@ int menu(void) {
 	scanf("%d", &select);
 
  return select;
-}
+}*/
