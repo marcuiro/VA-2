@@ -16,24 +16,48 @@ typedef struct Fila {
 }Fila;
 
 //protótipos de funções
+void verificarPrioridade(bool prioridade, int t, int f);
 void enfileirar(int PID, int tamanho, char nome[32], Fila *f1, Fila *f2);
 //int menu(void);
 
 int main() {
 
+	bool prioridade;
+	int t, f;
 	setlocale(LC_ALL, "Portuguese");
+		
+	printf("Prioridade? \n1 - Sim \n0 - Não\n");
+	scanf("%d", &prioridade);
 
-	int select;
+	verificarPrioridade(prioridade, t, f);
 	
 	return 0;
 
 }
 
+
+void verificarPrioridade(bool prioridade, int t, int f) {
+	t = 1;
+	f = 0;
+	if (prioridade == t) {
+		//printf("Good! ");
+		return ;
+	} if(prioridade == f) {
+		//printf("Not good! ");
+		return;
+		}
+}
+
 void enfileirar(int PID, int tamanho, char nome[32], Fila *f1, Fila *f2) {
 	Node *ptr = (Node*) malloc(sizeof(Node));
+	
+	bool prioridade;
+	int t, f;
+	
+	verificarPrioridade(prioridade, t, f);
 	if(ptr == NULL){
 		printf("FALHA NA ALOCAÇÂO!!! /n");
-		} else {
+		} if (prioridade == f) {
 			ptr->PID = PID;
 			ptr->tamanho = tamanho;
 			ptr->nome[32] = nome[32];
@@ -43,6 +67,8 @@ void enfileirar(int PID, int tamanho, char nome[32], Fila *f1, Fila *f2) {
 			}
 			
 			f1->end = ptr;
+			
+			
 	}
 }
 /*int menu(void) {

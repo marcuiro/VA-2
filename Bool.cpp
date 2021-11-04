@@ -15,7 +15,6 @@ int main() {
 		
 	printf("Prioridade? \n1 - Sim \n0 - Não\n");
 	scanf("%d", &prioridade);
-
 	verificarPrioridade(prioridade, t, f);
 	
 	return 0;
@@ -32,6 +31,6 @@ void verificarPrioridade(bool prioridade, int t, int f) {
 	} if(prioridade == f) {
 		//printf("Not good! ");
 		return;
-	}
+		}
 }
 
