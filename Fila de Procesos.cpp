@@ -17,7 +17,7 @@ typedef struct Fila {
 
 //protótipos de funções
 void verificarPrioridade(bool prioridade, int t, int f);
-void enfileirar(int PID, int tamanho, char nome[32], Fila *f1, Fila *f2);
+void enfileirarProcesso(int PID, int tamanho, char nome[32], Fila *f1, Fila *f2);
 //int menu(void);
 
 int main() {
@@ -48,7 +48,7 @@ void verificarPrioridade(bool prioridade, int t, int f) {
 		}
 }
 
-void enfileirar(int PID, int tamanho, char nome[32], Fila *f1, Fila *f2) {
+void enfileirarProcesso(int PID, int tamanho, char nome[32], Fila *f1, Fila *f2) {
 	Node *ptr = (Node*) malloc(sizeof(Node));
 	
 	bool prioridade;
@@ -64,12 +64,24 @@ void enfileirar(int PID, int tamanho, char nome[32], Fila *f1, Fila *f2) {
 			ptr->next = NULL;
 			if(f1->ini == NULL) {
 				f1->ini = ptr;
+			} else {
+				f1->end->next = ptr;
 			}
-			
 			f1->end = ptr;
-			
-			
-	}
+		} else if (prioridade == t) {
+			ptr->PID = PID;
+			ptr->tamanho = tamanho;
+			ptr->nome[32] = nome[32];
+			ptr->next = NULL;
+			if(f2->ini == NULL) {
+				f2->ini = ptr;
+			} else {
+				f2->end->next = ptr;
+			}
+			f2->end = ptr;
+		}
+		
+		f1->end = ptr;
 }
 /*int menu(void) {
 	
