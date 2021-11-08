@@ -24,7 +24,7 @@ void liberarPrrocessosF1 (Fila *f1);
 int main() {
 
 	bool prioridade;
-	int t, f;
+	int t, f, numPID;
 	setlocale(LC_ALL, "Portuguese");
 		
 	printf("Prioridade? \n1 - Sim \n0 - Não\n");
@@ -69,6 +69,7 @@ void enfileirarProcesso(int PID, int tamanho, char nome[32], Fila *f1, Fila *f2)
 				f1->end->next = ptr;
 			}
 			f1->end = ptr;
+			return;
 		} else if (prioridade == t) {
 			ptr->PID = PID;
 			ptr->tamanho = tamanho;
@@ -80,9 +81,9 @@ void enfileirarProcesso(int PID, int tamanho, char nome[32], Fila *f1, Fila *f2)
 				f2->end->next = ptr;
 			}
 			f2->end = ptr;
+			return;
 		}
 		
-		f1->end = ptr;
 }
 
 void liberarPrrocessosF1(Fila *f1) {
@@ -101,7 +102,7 @@ void liberarPrrocessosF1(Fila *f1) {
 		}
 		return;
 	} else { // se tiver algo no ponteiro.
-		printf("Fila Vazia! \n");
+		printf("Fila Vazia!!! \n");
 		return;
 	}
 }
