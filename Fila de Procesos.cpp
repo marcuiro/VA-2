@@ -18,6 +18,7 @@ typedef struct Fila {
 //protótipos de funções
 void verificarPrioridade(bool prioridade, int t, int f);
 void enfileirarProcesso(int PID, int tamanho, char nome[32], Fila *f1, Fila *f2);
+void liberarPrrocessosF1 (Fila *f1);
 //int menu(void);
 
 int main() {
@@ -82,6 +83,27 @@ void enfileirarProcesso(int PID, int tamanho, char nome[32], Fila *f1, Fila *f2)
 		}
 		
 		f1->end = ptr;
+}
+
+void liberarPrrocessosF1(Fila *f1) {
+	Node *ptr = f1->ini;
+	int PID;
+	int tamanho;
+	char nome[32];
+	if(ptr != NULL) { // Se o ponteiro não esta apontando para algo que seja NULL.
+		f1->ini = ptr->next; // Fila f1 no inicio se torna ponteiro apontando proximo
+		PID = ptr->PID; // Ponteiro apontando dados.
+		nome[32] = ptr->nome[32]; // Ponteiro apontando dados.
+		tamanho = ptr->tamanho; // Ponteiro apontando dados.		
+		free(ptr); // Liberando ponteiro
+		if(f1->ini == NULL) {
+			f1->end = NULL;
+		}
+		return;
+	} else { // se tiver algo no ponteiro.
+		printf("Fila Vazia! \n");
+		return;
+	}
 }
 /*int menu(void) {
 	
