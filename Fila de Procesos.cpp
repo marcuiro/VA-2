@@ -28,41 +28,74 @@ void liberarPrrocessosF1 (Fila *f1);
 void liberarPrrocessosF1 (Fila *f2);
 void imprimirF1 (Fila *f1);
 void imprimirF2 (Fila *f2);
-void RemoveProcessoPorPID(int NumPID);
-//int menu(void);
+void RemoveProcessoPorPID(int numPID);
 
 int main() {
 
 	setlocale(LC_ALL, "Portuguese");
 	
 	bool prioridade;
-	int t, f, numPID;
+	int t, f, numPID, PID, tamanho, select;
+	char nome[32];
 	
-	/*int menu(void) {
+    void inicializar(Fila * f1, Fila * f2);
 	
-	int select;
 	
-	printf("Escolha a opcao\n");
- 	printf("0. Sair\n");
- 	printf("1. Exibir fila de processos\n");
- 	printf("2. Adicionar processos a fila\n");
- 	printf("3. Remover processo da fila\n");
-	printf("4. Remover processo especifico da fila\n");
-	printf("5. Limpar fila");
-	printf("Opcao: "); 
-	scanf("%d", &select);
-
- return select;
-}*/
-	printf("Prioridade? \n1 - Sim \n0 - Não\n");
-	scanf("%d", &prioridade);
-
-	verificarPrioridade(prioridade, t, f);
+do{
+		printf("\n0 - Sair \n1 - Criar Processo \n2 - Remover Processo F1 \n3 - Remover Processo F2 \n4 - Exibir fila F1 \n5 - Exibir fila F2 \n6 - Remover Processo Específico com Prioridade \n");
+		scanf("%d", &select);
+		
+		switch(select){
+			case 0:
+				printf("Obrigado por utilizar o programa!");
+				break;
+			case 1:
+				verificarPrioridade(prioridade, t, f);
+				
+				printf("Prioridade? \n1 - Sim \n0 - Não\n");
+				scanf("%d", &prioridade);
+				printf("Nome do Processo: \n");
+				scanf("%s", &nome[32]);
+				printf("ID do processo: \n");
+				scanf("%d", &PID);
+				printf("Tamanho do processo: \n");
+				scanf("%d", &tamanho);
+				verificarPrioridade(prioridade, t, f);
+				void enfileirarProcesso(int PID, int tamanho,  char nome[32], Fila *f1, Fila f2);
+				break;
+			case 2:
+				void liberarPrrocessosF1 (Fila *f1);
+				break;
+			case 3:
+				void liberarPrrocessosF12 (Fila *f2);
+				break;
+			case 4:
+				void imprimirF1 (Fila *f1);
+				break;
+			case 5:
+				void imprimirF2 (Fila *f2);
+				break;
+			case 6:
+				printf("Insira o numero do PID que deve ser removido \n");
+				scanf("%d", &numPID);
+				void RemoveProcessoPorPID(int NumPID);
+				break;
+			default:
+				if(select != 0)
+					printf("Opção invalida!");
+		}
+	} while (select != 0);
 	
 	return 0;
 
 }
 
+void inicializar(Fila *f1, Fila *f2) {
+	f1->ini = NULL;
+	f1->end = NULL;
+	f2->ini = NULL;
+	f2->end = NULL;
+}
 
 void verificarPrioridade(bool prioridade, int t, int f) {
 	t = 1;
@@ -134,6 +167,27 @@ void liberarPrrocessosF1(Fila *f1) {
 	}
 }
 
+void liberarPrrocessosF2(Fila *f2) {
+	Node *ptr = f2->ini;
+	int PID;
+	int tamanho;
+	char nome[32];
+	if(ptr != NULL) { // Se o ponteiro não esta apontando para algo que seja NULL.
+		f2->ini = ptr->next; // Fila f1 no inicio se torna ponteiro apontando proximo
+		PID = ptr->PID; // Ponteiro apontando dados.
+		nome[32] = ptr->nome[32]; // Ponteiro apontando dados.
+		tamanho = ptr->tamanho; // Ponteiro apontando dados.		
+		free(ptr); // Liberando ponteiro
+		if(f2->ini == NULL) {
+			f2->end = NULL;
+		}
+		return;
+	} else { // se tiver algo no ponteiro.
+		printf("Fila Vazia!!! \n");
+		return;
+	}
+}
+
 void imprimirF1 (Fila *f1) {
 	Node *ptr = f1->ini;
 	if(ptr != NULL) {
@@ -178,9 +232,10 @@ void RemoveProcessoPorPIDF1(int NumPID, Fila *f1) {
 			anterior->next = ptr->next; // Refazendo encadeamento (Eu acho).
 	 	}
 	}
+	return;
 }
 
-void RemoveProcessoPorPIDF2(int NumPID, Fila *f2) {
+void RemoveProcessoPorPIDF2(int numPID, Fila *f2) {
 	Node *ptr = f2->ini;
 	Node *anterior = f2->ini = NULL;
 	int PID;
@@ -188,7 +243,7 @@ void RemoveProcessoPorPIDF2(int NumPID, Fila *f2) {
 	char nome[32];
 	if (ptr != NULL) {
 		f2->ini = ptr->next;
-		if (ptr->PID == NumPID) {
+		if (ptr->PID == numPID) {
 			PID = ptr->PID; // Ponteiro apontando dados.
 			nome[32] = ptr->nome[32]; // Ponteiro apontando dados.
 			tamanho = ptr->tamanho; // Ponteiro apontando dados.		
@@ -196,4 +251,5 @@ void RemoveProcessoPorPIDF2(int NumPID, Fila *f2) {
 			anterior->next = ptr->next; // Refazendo encadeamento (Eu acho).
 	 	}
 	}
+	return;
 }
