@@ -28,6 +28,7 @@ void liberarPrrocessosF1 (Fila *f1);
 void liberarPrrocessosF1 (Fila *f2);
 void imprimirF1 (Fila *f1);
 void imprimirF2 (Fila *f2);
+void RemoveProcessoPorPID(int NumPID);
 //int menu(void);
 
 int main() {
@@ -158,5 +159,41 @@ void imprimirF2 (Fila *f2) {
 		}	
 	} else {
 		printf("Fila de Prioridades Vazia!!! \n");
+	}
+}
+
+void RemoveProcessoPorPIDF1(int NumPID, Fila *f1) {
+	Node *ptr = f1->ini;
+	Node *anterior = f1->ini = NULL;
+	int PID;
+	int tamanho;
+	char nome[32];
+	if (ptr != NULL) {
+		f1->ini = ptr->next;
+		if (ptr->PID == NumPID) {
+			PID = ptr->PID; // Ponteiro apontando dados.
+			nome[32] = ptr->nome[32]; // Ponteiro apontando dados.
+			tamanho = ptr->tamanho; // Ponteiro apontando dados.		
+			free (ptr);
+			anterior->next = ptr->next; // Refazendo encadeamento (Eu acho).
+	 	}
+	}
+}
+
+void RemoveProcessoPorPIDF2(int NumPID, Fila *f2) {
+	Node *ptr = f2->ini;
+	Node *anterior = f2->ini = NULL;
+	int PID;
+	int tamanho;
+	char nome[32];
+	if (ptr != NULL) {
+		f2->ini = ptr->next;
+		if (ptr->PID == NumPID) {
+			PID = ptr->PID; // Ponteiro apontando dados.
+			nome[32] = ptr->nome[32]; // Ponteiro apontando dados.
+			tamanho = ptr->tamanho; // Ponteiro apontando dados.		
+			free (ptr);
+			anterior->next = ptr->next; // Refazendo encadeamento (Eu acho).
+	 	}
 	}
 }
