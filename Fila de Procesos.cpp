@@ -3,7 +3,7 @@
 #include <locale.h>
 
 //Matheus do Nascimento Saito - 2020262
-// Marco Ant�nio Martins - 1910497
+// Marco Antônio Martins - 1910497
 // Pedro Wilson Rodrigues de Lima - 2020267
 // Alexandre Silva Oliveira - 2111127
 // Guilherme Gomes de Almeida - 2020890
@@ -21,7 +21,7 @@ typedef struct Fila {
 	Node *end;
 }Fila;
 
-//prot�tipos de fun��es
+//protótipos de funções
 void verificarPrioridade(bool prioridade, int t, int f);
 void enfileirarProcesso(int PID, int tamanho, char nome[32], Fila *f1, Fila *f2);
 void liberarPrrocessosF1 (Fila *f1);
@@ -42,9 +42,11 @@ int main() {
 	
 	
 do{
-		printf("\n0 - Sair \n1 - Criar Processo \n2 - Remover Processo F1 \n3 - Remover Processo F2 \n4 - Exibir fila F1 \n5 - Exibir fila F2 \n6 - Remover Processo Espec�fico com Prioridade \n");
+		printf("\n\n>--------------------------------------------------<");
+		printf("\n0 - Sair \n1 - Criar Processo \n2 - Remover Processo F1 \n3 - Remover Processo F2 \n4 - Exibir fila F1 \n5 - Exibir fila F2 \n6 - Remover Processo Específico com Prioridade \n");
+		printf("\n\n>--------------------------------------------------<");	
 		scanf("%d", &select);
-		
+		system("cls");
 		switch(select){
 			case 0:
 				printf("Obrigado por utilizar o programa!");
@@ -52,7 +54,7 @@ do{
 			case 1:
 				verificarPrioridade(prioridade, t, f);
 				
-				printf("Prioridade? \n1 - Sim \n0 - N�o\n");
+				printf("Prioridade? \n1 - Sim \n0 - Não\n");
 				scanf("%d", &prioridade);
 				printf("Nome do Processo: \n");
 				scanf("%s", &nome[32]);
@@ -62,29 +64,42 @@ do{
 				scanf("%d", &tamanho);
 				verificarPrioridade(prioridade, t, f);
 				void enfileirarProcesso(int PID, int tamanho,  char nome[32], Fila *f1, Fila f2);
+				printf("\nDeseja realizar outra operação?\n 1 - Sim\n 2 - Não\n");
+				scanf("%d", &opt);
 				break;
 			case 2:
 				void liberarPrrocessosF1 (Fila *f1);
+				printf("\nDeseja realizar outra operação?\n 1 - Sim\n 2 - Não\n");
+				scanf("%d", &opt);
 				break;
 			case 3:
 				void liberarPrrocessosF12 (Fila *f2);
+				printf("\nDeseja realizar outra operação?\n 1 - Sim\n 2 - Não\n");
+				scanf("%d", &opt);
 				break;
 			case 4:
 				void imprimirF1 (Fila *f1);
+				printf("\nDeseja realizar outra operação?\n 1 - Sim\n 2 - Não\n");
+				scanf("%d", &opt);
 				break;
 			case 5:
 				void imprimirF2 (Fila *f2);
+				printf("\nDeseja realizar outra operação?\n 1 - Sim\n 2 - Não\n");
+				scanf("%d", &opt);
 				break;
 			case 6:
 				printf("Insira o numero do PID que deve ser removido \n");
 				scanf("%d", &numPID);
 				void RemoveProcessoPorPID(int NumPID);
+				printf("\nDeseja realizar outra operação?\n 1 - Sim\n 2 - Não\n");
+				scanf("%d", &opt);
 				break;
 			default:
-				if(select != 0)
-					printf("Op��o invalida!");
+				printf("Opção invalida!");
+				printf("\nDeseja realizar outra operação?\n 1 - Sim\n 2 - Não\n");
+				scanf("%d", &opt);
 		}
-	} while (select != 0);
+	} while (opt != 2);
 	
 	return 0;
 
@@ -117,7 +132,7 @@ void enfileirarProcesso(int PID, int tamanho, char nome[32], Fila *f1, Fila *f2)
 	
 	verificarPrioridade(prioridade, t, f);
 	if(ptr == NULL){
-		printf("FALHA NA ALOCA��O!!! /n");
+		printf("FALHA NA ALOCAÇÂO!!! /n");
 		} if (prioridade == f) {
 			ptr->PID = PID;
 			ptr->tamanho = tamanho;
@@ -151,7 +166,7 @@ void liberarPrrocessosF1(Fila *f1) {
 	int PID;
 	int tamanho;
 	char nome[32];
-	if(ptr != NULL) { // Se o ponteiro n�o esta apontando para algo que seja NULL.
+	if(ptr != NULL) { // Se o ponteiro não esta apontando para algo que seja NULL.
 		f1->ini = ptr->next; // Fila f1 no inicio se torna ponteiro apontando proximo
 		PID = ptr->PID; // Ponteiro apontando dados.
 		nome[32] = ptr->nome[32]; // Ponteiro apontando dados.
@@ -172,7 +187,7 @@ void liberarPrrocessosF2(Fila *f2) {
 	int PID;
 	int tamanho;
 	char nome[32];
-	if(ptr != NULL) { // Se o ponteiro n�o esta apontando para algo que seja NULL.
+	if(ptr != NULL) { // Se o ponteiro não esta apontando para algo que seja NULL.
 		f2->ini = ptr->next; // Fila f1 no inicio se torna ponteiro apontando proximo
 		PID = ptr->PID; // Ponteiro apontando dados.
 		nome[32] = ptr->nome[32]; // Ponteiro apontando dados.
